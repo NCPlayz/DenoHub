@@ -1,5 +1,5 @@
 # DenoHub
 
-A GitHub REST Client for Deno.
+A GitHub API v3 Client for Deno.
 
 > Work In Progress!

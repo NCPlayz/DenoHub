@@ -21,7 +21,7 @@ class HTTPClient {
         let headers = options?.headers || {}
         headers['Authorization'] = `token ${this.auth.oauthToken}`
         headers['Content-Type'] = `application/json`
-        headers['User-Agent'] = 'DenoHub'
+        headers['User-Agent'] = 'NCPlayz/DenoHub'
         let result: Response = await fetch(route.url, {
             method: route.verb,
             headers: headers,
