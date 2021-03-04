@@ -70,15 +70,16 @@ class HTTPClient {
   // TODO: It may be good to hard-code template URIs for inner endpoints according to the documentation.
 
   getBlockedUsers(): Promise<UserStructure[]> {
-    return new Route("GET", this.urls!.current_user_urls + "/blocks");
+    return this.request(new Route("GET", this.urls!.current_user_url + "/blocks"));
   }
 
-  checkIfBlocking(username: string): Promise<boolean> {
-    return new Route(
-      "GET",
-      this.urls!.current_user_urls + "/blocks/" + username
-    );
-  }
+  // TODO: 204 = true; may need to split up request into a raw and several handlers e.g. pagination and this.
+  // checkIfBlocking(username: string): Promise<boolean> {
+  //   return this.request(new Route(
+  //     "GET",
+  //     this.urls!.current_user_url + "/blocks/" + username
+  //   ));
+  // }
 
   getEmojis(): Promise<Record<string, string>> {
     return this.request(new Route("GET", this.urls!.emojis_url));
