@@ -83,3 +83,10 @@ export interface PlanStructure {
   collaborators: number;
   private_repos: number;
 }
+
+export interface EmailStructure {
+  email: string;
+  primary: boolean;
+  verified: boolean;
+  visibility: string | null;
+}

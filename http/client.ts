@@ -1,7 +1,11 @@
 import { expand } from "https://deno.land/x/deno_uri_template/mod.ts";
 import Route from "./route.ts";
 import { AuthOptions, RequestOptions } from "./options.ts";
-import { BaseEndpointStructure, UserStructure } from "./structure.ts";
+import {
+  BaseEndpointStructure,
+  UserStructure,
+  EmailStructure,
+} from "./structure.ts";
 import { ListUsersPayload } from "./payload.ts";
 import { HTTPException, NotFound } from "./errors.ts";
 
@@ -16,9 +20,7 @@ class HTTPClient {
   }
 
   async login() {
-    this.urls = await this.request(
-      new Route("GET", this.auth.baseURL || DEFAULT_URL)
-    );
+    this.urls = await this.request(new Route("GET", this.baseURL));
   }
 
   async request(route: Route, options?: RequestOptions): Promise<any> {
@@ -61,10 +63,29 @@ class HTTPClient {
     );
   }
 
-  listUsers(payload?: ListUsersPayload): Promise<UserStructure[]> {
-    return this.request(
-      this.fromBase("GET", "/users", payload)
+  getEmails(): Promise<EmailStructure[]> {
+    return this.request(new Route("GET", this.urls!.emails_url));
+  }
+
+  // TODO: It may be good to hard-code template URIs for inner endpoints according to the documentation.
+
+  getBlockedUsers(): Promise<UserStructure[]> {
+    return new Route("GET", this.urls!.current_user_urls + "/blocks");
+  }
+
+  checkIfBlocking(username: string): Promise<boolean> {
+    return new Route(
+      "GET",
+      this.urls!.current_user_urls + "/blocks/" + username
     );
+  }
+
+  getEmojis(): Promise<Record<string, string>> {
+    return this.request(new Route("GET", this.urls!.emojis_url));
+  }
+
+  listUsers(payload?: ListUsersPayload): Promise<UserStructure[]> {
+    return this.request(this.fromBase("GET", "/users", payload));
   }
 }
 
