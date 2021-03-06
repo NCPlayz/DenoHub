@@ -1,5 +1,9 @@
+interface ExceptionPayload {
+  message: string;
+}
+
 class HTTPException extends Error {
-  constructor(public payload: any) {
+  constructor(public payload: ExceptionPayload) {
     super(payload.message);
   }
 }

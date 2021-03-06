@@ -10,6 +10,9 @@ export interface ClientOptions {
 export interface RequestOptions {
   json?: Record<string, any>;
   headers?: Record<string, string>;
+  checking?: {
+    fail404?: boolean;
+  };
 }
 
 export interface UserEditOptions {
