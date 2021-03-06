@@ -1,6 +1,6 @@
 import { HTTPClient } from "./http/index.ts";
 import { ClientOptions } from "./http/options.ts";
-import { ListUsersPayload } from "./http/payload.ts";
+import { ListUsersParameters } from "./http/parameters.ts";
 import { CurrentUser, User } from "./models/user.ts";
 
 class Client {
@@ -26,7 +26,7 @@ class Client {
       .then((user) => new User(this.http, user));
   }
 
-  async listUsers(parameters?: ListUsersPayload): Promise<User[]> {
+  async listUsers(parameters?: ListUsersParameters): Promise<User[]> {
     return await this.http
       .listUsers(parameters)
       .then((users) => users.map((user) => new User(this.http, user)));

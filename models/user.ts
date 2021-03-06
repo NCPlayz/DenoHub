@@ -30,6 +30,10 @@ class CurrentUser extends User {
     this.data = await this.http.editCurrentUser(options);
   }
 
+  isBlockingUser(username: string): Promise<boolean> {
+      return this.http.checkIfBlocking(username);
+  }
+
   blockUser(username: string): Promise<boolean> {
     return this.http.blockUser(username);
   }
