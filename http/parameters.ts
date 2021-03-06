@@ -17,7 +17,26 @@ export function filterParameters(
 }
 
 export interface ListUsersParameters {
-  accept?: string;
   since?: number;
   per_page?: number;
+}
+
+export interface GetContextualInformationForAUser {
+  subject_type: string;
+  subject_id: string;
+}
+
+export interface ListEmailAddresses {
+  per_page?: number;
+  page?: number;
+}
+
+export interface ListFollowers {
+  per_page?: number;
+  page?: number;
+}
+
+export interface ListFollowing {
+  per_page?: number;
+  page?: number;
 }

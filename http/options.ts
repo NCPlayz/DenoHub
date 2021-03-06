@@ -23,5 +23,14 @@ export interface UserEditOptions {
   location?: string;
   hireable?: string;
   bio?: string;
-  twitter_username?: string;
+  twitter_username?: string | null;
+}
+
+export interface SetPrimaryEmailVisibility {
+  email: string;
+  visibility: string;
+}
+
+export interface AddOrDeleteAnEmailAddress {
+  emails: string[];
 }
